@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: processing_applications
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: postgres
+  jpa:
+    properties:
+      hibernate:
+        ddl-auto: validate
+  liquibase:
+    change-log: db/changelog/changelog-master.xml
+#  main:
+#    allow-circular-references: true
+
+jwt:
+  secret: dhfbgdkjshfsdhfs5273645723hfdsdfgskd
+  lifetime: 30m
