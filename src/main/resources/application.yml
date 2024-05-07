@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: processing_applications
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: postgres
+  jpa:
+    properties:
+      hibernate:
+        ddl-auto: validate
+  liquibase:
+    change-log: db/changelog/changelog-master.xml
+  cloud:
+    openfeign:
+      client:
+        config:
+          checkPhone:
+            url: https://cleaner.dadata.ru/api/v1/clean/phone
+            connect-timeout: 5000
+            read-timeout: 5000
+
+jwt:
+  secret: dhfbgdkjshfsdhfs5273645723hfdsdfgskd
+  lifetime: 30m

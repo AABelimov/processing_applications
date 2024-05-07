@@ -4,4 +4,10 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                    https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
+    <include file="table/create-roles-table.xml" relativeToChangelogFile="true"/>
+    <include file="table/create-users-table.xml" relativeToChangelogFile="true"/>
+    <include file="table/create-applications-table.xml" relativeToChangelogFile="true"/>
+    <include file="table/create-users_roles-table.xml" relativeToChangelogFile="true"/>
+    <include file="data/add-data-in-roles-table.xml" relativeToChangelogFile="true"/>
+
 </databaseChangeLog>
