@@ -8,5 +8,6 @@
     <include file="table/create-users-table.xml" relativeToChangelogFile="true"/>
     <include file="table/create-applications-table.xml" relativeToChangelogFile="true"/>
     <include file="table/create-users_roles-table.xml" relativeToChangelogFile="true"/>
+    <include file="data/add-data-in-roles-table.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>

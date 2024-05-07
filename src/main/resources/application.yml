@@ -11,8 +11,14 @@ spring:
         ddl-auto: validate
   liquibase:
     change-log: db/changelog/changelog-master.xml
-#  main:
-#    allow-circular-references: true
+  cloud:
+    openfeign:
+      client:
+        config:
+          checkPhone:
+            url: https://cleaner.dadata.ru/api/v1/clean/phone
+            connect-timeout: 5000
+            read-timeout: 5000
 
 jwt:
   secret: dhfbgdkjshfsdhfs5273645723hfdsdfgskd

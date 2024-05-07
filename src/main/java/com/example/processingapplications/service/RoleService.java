@@ -16,4 +16,8 @@ public class RoleService {
     public Role getUserRole() {
         return roleRepository.findByName(com.example.processingapplications.enums.Role.ROLE_USER.name()).orElseThrow();
     }
+
+    public Role getOperatorRole() {
+        return roleRepository.findByName(com.example.processingapplications.enums.Role.ROLE_OPERATOR.name()).orElseThrow();
+    }
 }

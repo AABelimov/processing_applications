@@ -1,5 +1,6 @@
 package com.example.processingapplications.service;
 
+import com.example.processingapplications.client.model.CheckPhoneResponse;
 import com.example.processingapplications.dto.SignUpDto;
 import com.example.processingapplications.dto.JwtAuthenticationResponse;
 import com.example.processingapplications.dto.SignInDto;
@@ -28,14 +29,18 @@ public class AuthenticationService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public JwtAuthenticationResponse signUp(SignUpDto signUpDto) {
+    public JwtAuthenticationResponse signUp(SignUpDto signUpDto, CheckPhoneResponse checkPhoneResponse) {
         if (userService.existByUsername(signUpDto.getUsername())) {
             throw new RuntimeException(); // TODO: add UserAlreadyException
         }
-        signUpDto.setPassword(passwordEncoder.encode(signUpDto.getPassword()));
-        UserDetails userDetails = userService.createUser(signUpDto);
-        String token = jwtTokenUtility.generateToken(userDetails);
-        return new JwtAuthenticationResponse(token);
+
+        if (checkPhoneResponse.getType().equals("Мобильный")) {
+            signUpDto.setPassword(passwordEncoder.encode(signUpDto.getPassword()));
+            UserDetails userDetails = userService.createUser(signUpDto, checkPhoneResponse);
+            String token = jwtTokenUtility.generateToken(userDetails);
+            return new JwtAuthenticationResponse(token);
+        }
+        throw new RuntimeException(); //TODO: add exception
     }
 
     public JwtAuthenticationResponse signIn(SignInDto signInDto) {

@@ -14,6 +14,7 @@ public class Application {
     @ManyToOne
     private User user;
     private String status;
+    private Long createdAt;
 
     public Long getId() {
         return id;
@@ -45,5 +46,13 @@ public class Application {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Long getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Long createdAt) {
+        this.createdAt = createdAt;
     }
 }

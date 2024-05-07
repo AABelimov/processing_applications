@@ -28,17 +28,15 @@ public class JwtTokenUtility {
         Date issuedDate = new Date();
         Date expiredDate = new Date(issuedDate.getTime() + jwtLifetime.toMillis());
         Map<String, Object> claims = new HashMap<>();
-        String username = userDetails.getUsername();
         List<String> roles = userDetails.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .toList();
 
-        claims.put("username", username);
         claims.put("roles", roles);
 
         return Jwts.builder()
                 .claims(claims)
-                .subject(username)
+                .subject(userDetails.getUsername())
                 .issuedAt(issuedDate)
                 .expiration(expiredDate)
                 .signWith(getKey())

@@ -1,5 +1,7 @@
 package com.example.processingapplications.controller;
 
+import com.example.processingapplications.client.CheckPhoneClient;
+import com.example.processingapplications.client.model.CheckPhoneResponse;
 import com.example.processingapplications.dto.SignInDto;
 import com.example.processingapplications.dto.SignUpDto;
 import com.example.processingapplications.dto.JwtAuthenticationResponse;
@@ -13,14 +15,17 @@ import org.springframework.web.bind.annotation.*;
 public class AuthenticationController {
 
     private final AuthenticationService authenticationService;
+    private final CheckPhoneClient checkPhoneClient;
 
-    public AuthenticationController(AuthenticationService authenticationService) {
+    public AuthenticationController(AuthenticationService authenticationService, CheckPhoneClient checkPhoneClient) {
         this.authenticationService = authenticationService;
+        this.checkPhoneClient = checkPhoneClient;
     }
 
     @PostMapping("/sign-up")
     public ResponseEntity<JwtAuthenticationResponse> signUp(@RequestBody SignUpDto signUpDto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(authenticationService.signUp(signUpDto));
+        CheckPhoneResponse checkPhoneResponse = checkPhoneClient.getInfo(new String[] {signUpDto.getNumberPhone()})[0];
+        return ResponseEntity.status(HttpStatus.CREATED).body(authenticationService.signUp(signUpDto, checkPhoneResponse));
     }
 
     @PostMapping("/sign-in")
